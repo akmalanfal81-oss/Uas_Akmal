@@ -3,6 +3,7 @@ package com.example.martabakdanterangbulan
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +28,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MenuActivity::class.java)
             // Mengirim data "KATEGORI" berisi "TERANGBULAN"
             intent.putExtra("KATEGORI", "TERANGBULAN")
+            startActivity(intent)
+        }
+
+        // Kode untuk tombol profil
+        val btnProfile = findViewById<ImageButton>(R.id.btnProfile)
+
+        btnProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
     }
