@@ -15,6 +15,12 @@ class MenuActivity : AppCompatActivity() {
         val tvKategoriTitle = findViewById<TextView>(R.id.tvKategoriTitle)
         val rvMenu = findViewById<RecyclerView>(R.id.rvMenu)
 
+        // Menemukan tombol kembali dan memberinya perintah 'finish'
+        val btnBackMenu = findViewById<android.widget.ImageButton>(R.id.btnBackMenu)
+        btnBackMenu.setOnClickListener {
+            finish() // Menutup halaman Menu dan kembali ke halaman utama
+        }
+
         // Mengatur agar daftar menu memanjang ke bawah (vertikal)
         rvMenu.layoutManager = LinearLayoutManager(this)
 

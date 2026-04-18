@@ -9,6 +9,16 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
+        <ImageButton
+            android:id="@+id/btnBackProfile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_back_arrow"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
             android:id="@+id/tvProfileTitle"
             android:layout_width="wrap_content"
@@ -21,26 +31,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivProfilePicture"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvProfilePicture"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_marginTop="24dp"
-            android:background="#DDDDDD"
-            android:src="@drawable/baseline_person_24"
+            app:cardCornerRadius="60dp"
+            app:cardBackgroundColor="#2C2C2C"
             app:layout_constraintTop_toBottomOf="@id/tvProfileTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/ivProfilePicture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_person_24"
+                app:tint="@color/white" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tvChangePhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ketuk untuk ubah foto"
-            android:textColor="#0066CC"
-            android:textSize="12sp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/ivProfilePicture"
+            android:textColor="@color/orange_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/cvProfilePicture"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
