@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MenuAdapter(private val listMenu: ArrayList<MenuItem>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
+    // TAMBAHAN: Membuat variabel pendengar klik
+    var onItemClick: ((MenuItem) -> Unit)? = null
+
     // 1. Memanggil cetakan XML (item_menu.xml)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
@@ -19,6 +22,11 @@ class MenuAdapter(private val listMenu: ArrayList<MenuItem>) : RecyclerView.Adap
         val menu = listMenu[position]
         holder.tvName.text = menu.namaMenu
         holder.tvPrice.text = menu.hargaMenu
+
+        // TAMBAHAN: Memberi aksi saat kotak menu ini diklik
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(menu)
+        }
     }
 
     // 3. Menghitung ada berapa banyak kue (menu) yang mau dicetak
