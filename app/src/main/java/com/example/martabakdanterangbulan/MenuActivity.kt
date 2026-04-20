@@ -34,9 +34,14 @@ class MenuActivity : AppCompatActivity() {
         // Mengisi keranjang sesuai tombol atau menu yang diklik
         if (kategoriDipilih == "MARTABAK") {
             tvKategoriTitle.text = "Daftar Menu Martabak"
-            daftarMenu.add(MenuItem("Martabak Telur Bebek (2 Telur)", "Rp 30.000"))
-            daftarMenu.add(MenuItem("Martabak Daging Sapi Spesial", "Rp 45.000"))
-            daftarMenu.add(MenuItem("Martabak Ayam Jamur", "Rp 35.000"))
+            daftarMenu.add(MenuItem("Martabak Telur Biasa", "Rp 25.000"))
+            daftarMenu.add(MenuItem("Martabak Telur Biasa + Keju", "Rp 30.000"))
+            daftarMenu.add(MenuItem("Martabak Telur Spesial", "Rp 32.000"))
+            daftarMenu.add(MenuItem("Martabak Telur Spesial + Keju", "Rp 35.000"))
+            daftarMenu.add(MenuItem("Martabak Telur Istimewa", "Rp 40.000"))
+            daftarMenu.add(MenuItem("Martabak Telur Istimewa + Keju", "Rp 45.000"))
+            daftarMenu.add(MenuItem("Martabak Telur Super", "Rp 50.000"))
+            daftarMenu.add(MenuItem("Martabak Telur Super + Keju", "Rp 55.000"))
 
         } else if (kategoriDipilih == "TERANGBULAN") {
             tvKategoriTitle.text = "Pilih Adonan Terang Bulan"
@@ -47,19 +52,71 @@ class MenuActivity : AppCompatActivity() {
             // KATEGORI BARU UNTUK MASING-MASING ADONAN
         } else if (kategoriDipilih == "TOPING_ORIGINAL") {
             tvKategoriTitle.text = "Toping - Adonan Original"
-            daftarMenu.add(MenuItem("Original Coklat Kacang", "Rp 25.000"))
-            daftarMenu.add(MenuItem("Original Keju Susu", "Rp 30.000"))
-            daftarMenu.add(MenuItem("Original Campur Spesial", "Rp 35.000"))
+            daftarMenu.add(MenuItem("Original Coklat Susu", "Rp 16.000"))
+            daftarMenu.add(MenuItem("Original Kacang Susu", "Rp 18.000"))
+            daftarMenu.add(MenuItem("Original Coklat Kacang Susu", "Rp 20.000"))
+            daftarMenu.add(MenuItem("Original Keju Susu", "Rp 22.000"))
+            daftarMenu.add(MenuItem("Original Coklat Keju Susu", "Rp 24.000"))
+            daftarMenu.add(MenuItem("Original Kacang Keju Susu", "Rp 25.000"))
+            daftarMenu.add(MenuItem("Original Coklat Kacang Keju Susu", "Rp 27.000"))
+            daftarMenu.add(MenuItem("Original Pisang Susu", "Rp 23.000"))
+            daftarMenu.add(MenuItem("Original Pisang Keju Susu", "Rp 26.000"))
+            daftarMenu.add(MenuItem("Original Pisang Coklat Susu", "Rp 24.000"))
+            daftarMenu.add(MenuItem("Original Pisang Kacang Susu", "Rp 25.000"))
+            daftarMenu.add(MenuItem("Original Pisang Coklat Kacang Susu", "Rp 26.000"))
+            daftarMenu.add(MenuItem("Original Pisang Keju Kacang Susu", "Rp 30.000"))
+            daftarMenu.add(MenuItem("Original Pisang Coklat Keju Susu", "Rp 28.000"))
+            daftarMenu.add(MenuItem("Original Pisang Coklat Kacang Keju Susu", "Rp 32.000"))
+            daftarMenu.add(MenuItem("Original Double Keju Susu", "Rp 33.000"))
+            daftarMenu.add(MenuItem("Original Double Keju Coklat Susu", "Rp 35.000"))
+            daftarMenu.add(MenuItem("Original Double Keju Kacang Susu", "Rp 36.000"))
+            daftarMenu.add(MenuItem("Original Double Keju Coklat Kacang Susu", "Rp 38.000"))
+            daftarMenu.add(MenuItem("Original Komplit (Double Keju, Coklat, Kacang, Pisang, Susu)", "Rp 42.000"))
 
         } else if (kategoriDipilih == "TOPING_PANDAN") {
             tvKategoriTitle.text = "Toping - Adonan Pandan"
-            daftarMenu.add(MenuItem("Pandan Coklat Keju", "Rp 28.000"))
-            daftarMenu.add(MenuItem("Pandan Jagung Keju", "Rp 32.000"))
+            daftarMenu.add(MenuItem("Pandan Coklat Susu", "Rp 18.000"))
+            daftarMenu.add(MenuItem("Pandan Kacang Susu", "Rp 20.000"))
+            daftarMenu.add(MenuItem("Pandan Coklat Kacang Susu", "Rp 22.000"))
+            daftarMenu.add(MenuItem("Pandan Keju Susu", "Rp 24.000"))
+            daftarMenu.add(MenuItem("Pandan Coklat Keju Susu", "Rp 26.000"))
+            daftarMenu.add(MenuItem("Pandan Kacang Keju Susu", "Rp 27.000"))
+            daftarMenu.add(MenuItem("Pandan Coklat Kacang Keju Susu", "Rp 29.000"))
+            daftarMenu.add(MenuItem("Pandan Pisang Susu", "Rp 25.000"))
+            daftarMenu.add(MenuItem("Pandan Pisang Keju Susu", "Rp 28.000"))
+            daftarMenu.add(MenuItem("Pandan Pisang Coklat Susu", "Rp 26.000"))
+            daftarMenu.add(MenuItem("Pandan Pisang Kacang Susu", "Rp 27.000"))
+            daftarMenu.add(MenuItem("Pandan Pisang Coklat Kacang Susu", "Rp 28.000"))
+            daftarMenu.add(MenuItem("Pandan Pisang Keju Kacang Susu", "Rp 32.000"))
+            daftarMenu.add(MenuItem("Pandan Pisang Coklat Keju Susu", "Rp 30.000"))
+            daftarMenu.add(MenuItem("Pandan Pisang Coklat Kacang Keju Susu", "Rp 34.000"))
+            daftarMenu.add(MenuItem("Pandan Double Keju Susu", "Rp 35.000"))
+            daftarMenu.add(MenuItem("Pandan Double Keju Coklat Susu", "Rp 37.000"))
+            daftarMenu.add(MenuItem("Pandan Double Keju Kacang Susu", "Rp 38.000"))
+            daftarMenu.add(MenuItem("Pandan Double Keju Coklat Kacang Susu", "Rp 40.000"))
+            daftarMenu.add(MenuItem("Pandan Komplit (Double Keju, Coklat, Kacang, Pisang, Susu)", "Rp 44.000"))
 
         } else if (kategoriDipilih == "TOPING_RED_VELVET") {
-            tvKategoriTitle.text = "Toping - Red Velvet"
-            daftarMenu.add(MenuItem("Red Velvet Oreo Cream Cheese", "Rp 35.000"))
-            daftarMenu.add(MenuItem("Red Velvet Nutella", "Rp 38.000"))
+            daftarMenu.add(MenuItem("Red Velvet Coklat Susu", "Rp 20.000"))
+            daftarMenu.add(MenuItem("Red Velvet Kacang Susu", "Rp 22.000"))
+            daftarMenu.add(MenuItem("Red Velvet Coklat Kacang Susu", "Rp 24.000"))
+            daftarMenu.add(MenuItem("Red Velvet Keju Susu", "Rp 26.000"))
+            daftarMenu.add(MenuItem("Red Velvet Coklat Keju Susu", "Rp 30.000"))
+            daftarMenu.add(MenuItem("Red Velvet Kacang Keju Susu", "Rp 29.000"))
+            daftarMenu.add(MenuItem("Red Velvet Coklat Kacang Keju Susu", "Rp 31.000"))
+            daftarMenu.add(MenuItem("Red Velvet Pisang Susu", "Rp 27.000"))
+            daftarMenu.add(MenuItem("Red Velvet Pisang Keju Susu", "Rp 30.000"))
+            daftarMenu.add(MenuItem("Red Velvet Pisang Coklat Susu", "Rp 28.000"))
+            daftarMenu.add(MenuItem("Red Velvet Pisang Kacang Susu", "Rp 29.000"))
+            daftarMenu.add(MenuItem("Red Velvet Pisang Coklat Kacang Susu", "Rp 30.000"))
+            daftarMenu.add(MenuItem("Red Velvet Pisang Keju Kacang Susu", "Rp 34.000"))
+            daftarMenu.add(MenuItem("Red Velvet Pisang Coklat Keju Susu", "Rp 32.000"))
+            daftarMenu.add(MenuItem("Red Velvet Pisang Coklat Kacang Keju Susu", "Rp 36.000"))
+            daftarMenu.add(MenuItem("Red VelvetDouble Keju Susu", "Rp 37.000"))
+            daftarMenu.add(MenuItem("Red Velvet Double Keju Coklat Susu", "Rp 39.000"))
+            daftarMenu.add(MenuItem("Red Velvet Double Keju Kacang Susu", "Rp 40.000"))
+            daftarMenu.add(MenuItem("Red Velvet Double Keju Coklat Kacang Susu", "Rp 42.000"))
+            daftarMenu.add(MenuItem("Red VelvetKomplit (Double Keju, Coklat, Kacang, Pisang, Susu)", "Rp 46.000"))
         }
 
         // TAHAP AKHIR: Nyalakan mesin Adapter
