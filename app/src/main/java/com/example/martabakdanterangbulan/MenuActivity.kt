@@ -119,16 +119,26 @@ class MenuActivity : AppCompatActivity() {
             daftarMenu.add(MenuItem("Red VelvetKomplit (Double Keju, Coklat, Kacang, Pisang, Susu)", "Rp 46.000"))
         }
 
-        // TAHAP AKHIR: Nyalakan mesin Adapter
+        // TAHAP SEBELUM ADAPTER: Masukkan deskripsi otomatis ke semua menu
+        val descMartabak = "Martabak telur gurih dengan isian daging cincang, potongan daun bawang segar, dan bumbu rempah pilihan. Digoreng garing dengan balutan kulit lumpia renyah. Disajikan dengan kuah cuka (cuko) dan acar mentimun."
+        val descTerbul = "Terang bulan manis bersarang sempurna. Terbuat dari adonan tepung premium, telur, dan mentega wangi. Disajikan dengan olesan mentega dan isian toping yang sangat melimpah."
+
+        for (kue in daftarMenu) {
+            if (kategoriDipilih == "MARTABAK") {
+                kue.deskripsiMenu = descMartabak
+            } else if (kategoriDipilih != "TERANGBULAN") { // Ini berarti pilihan Toping akhir
+                kue.deskripsiMenu = descTerbul
+            }
+        }
+
+        // Nyalakan mesin Adapter
         val adapterMenu = MenuAdapter(daftarMenu)
 
         // MENANGKAP KLIK DARI KOTAK MENU
         adapterMenu.onItemClick = { menuYangDiklik ->
-            // Kita hanya pindah halaman JIKA pengguna sedang berada di halaman pemilihan adonan
             if (kategoriDipilih == "TERANGBULAN") {
+                // Pindah ke pilihan toping (ini tetap jalan seperti biasa)
                 val intentBaru = Intent(this, MenuActivity::class.java)
-
-                // Cek adonan mana yang diklik berdasarkan nama menunya
                 if (menuYangDiklik.namaMenu.contains("Original")) {
                     intentBaru.putExtra("KATEGORI", "TOPING_ORIGINAL")
                 } else if (menuYangDiklik.namaMenu.contains("Pandan")) {
@@ -136,8 +146,14 @@ class MenuActivity : AppCompatActivity() {
                 } else if (menuYangDiklik.namaMenu.contains("Red Velvet")) {
                     intentBaru.putExtra("KATEGORI", "TOPING_RED_VELVET")
                 }
-
                 startActivity(intentBaru)
+            } else {
+                // BUKA HALAMAN INFO PRODUK KARENA MENU AKHIR DIKLIK
+                val intentInfo = Intent(this, InfoActivity::class.java)
+                intentInfo.putExtra("NAMA_MENU", menuYangDiklik.namaMenu)
+                intentInfo.putExtra("HARGA_MENU", menuYangDiklik.hargaMenu)
+                intentInfo.putExtra("DESC_MENU", menuYangDiklik.deskripsiMenu)
+                startActivity(intentInfo)
             }
         }
 
