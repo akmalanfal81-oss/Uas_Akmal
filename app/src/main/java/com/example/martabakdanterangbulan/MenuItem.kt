@@ -1,8 +1,9 @@
 package com.example.martabakdanterangbulan
 
-// Ini adalah struktur adonan datanya
+// Tambahkan "gambarMenu" berupa Int (karena ID resource di Android dibaca sebagai angka/Int)
 data class MenuItem(
     val namaMenu: String,
     val hargaMenu: String,
-    var deskripsiMenu: String = "" // Tambahan untuk menyimpan info bahan
+    val gambarMenu: Int,
+    var deskripsiMenu: String = ""
 )

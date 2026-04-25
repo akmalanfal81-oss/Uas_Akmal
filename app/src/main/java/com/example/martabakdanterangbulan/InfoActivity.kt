@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,9 +20,14 @@ class InfoActivity : AppCompatActivity() {
         val tvNama = findViewById<TextView>(R.id.tvInfoNamaMenu)
         val tvHarga = findViewById<TextView>(R.id.tvInfoHargaMenu)
         val tvDesc = findViewById<TextView>(R.id.tvInfoDeskripsi)
+        val ivGambar = findViewById<ImageView>(R.id.ivInfoGambar) // Menemukan gambar
 
         val namaMenu = intent.getStringExtra("NAMA_MENU") ?: ""
         val hargaMenu = intent.getStringExtra("HARGA_MENU") ?: ""
+
+        // BAGIAN BARU: Menangkap gambar dan memasangnya
+        val gambarMenu = intent.getIntExtra("GAMBAR_MENU", R.drawable.logo)
+        ivGambar.setImageResource(gambarMenu)
 
         tvNama.text = namaMenu
         tvHarga.text = hargaMenu
@@ -29,7 +35,7 @@ class InfoActivity : AppCompatActivity() {
 
         val btnTambahKeranjang = findViewById<Button>(R.id.btnTambahKeranjang)
         val btnLihatKeranjang = findViewById<Button>(R.id.btnLihatKeranjang)
-        val btnBeliLangsung = findViewById<Button>(R.id.btnBeliLangsung) // Tombol Baru
+        val btnBeliLangsung = findViewById<Button>(R.id.btnBeliLangsung)
 
         btnTambahKeranjang.setOnClickListener {
             CartManager.cartList.add(CartItem(namaMenu, hargaMenu))
@@ -41,7 +47,6 @@ class InfoActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // LOGIKA BELI LANGSUNG (Abaikan keranjang, langsung ke bayar)
         btnBeliLangsung.setOnClickListener {
             val intent = Intent(this, PaymentActivity::class.java)
             intent.putExtra("TOTAL_BAYAR", hargaMenu)
