@@ -71,4 +71,40 @@
         android:lineSpacingExtra="4dp"
         app:layout_constraintTop_toBottomOf="@id/tvInfoHargaMenu" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintTop_toBottomOf="@id/tvInfoDeskripsi"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnBeliLangsung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Beli Langsung Sekarang"
+            android:backgroundTint="#388E3C"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnTambahKeranjang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tambah ke Keranjang"
+            android:backgroundTint="@color/orange_primary"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnLihatKeranjang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lihat Keranjang"
+            android:backgroundTint="#4E342E"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

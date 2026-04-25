@@ -1,8 +1,11 @@
 package com.example.martabakdanterangbulan
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class InfoActivity : AppCompatActivity() {
@@ -10,20 +13,39 @@ class InfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
 
-        // Tombol kembali (X)
         val btnBackInfo = findViewById<ImageButton>(R.id.btnBackInfo)
-        btnBackInfo.setOnClickListener {
-            finish()
-        }
+        btnBackInfo.setOnClickListener { finish() }
 
-        // Menghubungkan variabel dengan XML
         val tvNama = findViewById<TextView>(R.id.tvInfoNamaMenu)
         val tvHarga = findViewById<TextView>(R.id.tvInfoHargaMenu)
         val tvDesc = findViewById<TextView>(R.id.tvInfoDeskripsi)
 
-        // Mengambil data yang dikirimkan dari kotak menu yang diklik
-        tvNama.text = intent.getStringExtra("NAMA_MENU")
-        tvHarga.text = intent.getStringExtra("HARGA_MENU")
+        val namaMenu = intent.getStringExtra("NAMA_MENU") ?: ""
+        val hargaMenu = intent.getStringExtra("HARGA_MENU") ?: ""
+
+        tvNama.text = namaMenu
+        tvHarga.text = hargaMenu
         tvDesc.text = intent.getStringExtra("DESC_MENU")
+
+        val btnTambahKeranjang = findViewById<Button>(R.id.btnTambahKeranjang)
+        val btnLihatKeranjang = findViewById<Button>(R.id.btnLihatKeranjang)
+        val btnBeliLangsung = findViewById<Button>(R.id.btnBeliLangsung) // Tombol Baru
+
+        btnTambahKeranjang.setOnClickListener {
+            CartManager.cartList.add(CartItem(namaMenu, hargaMenu))
+            Toast.makeText(this, "$namaMenu berhasil masuk keranjang!", Toast.LENGTH_SHORT).show()
+        }
+
+        btnLihatKeranjang.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
+
+        // LOGIKA BELI LANGSUNG (Abaikan keranjang, langsung ke bayar)
+        btnBeliLangsung.setOnClickListener {
+            val intent = Intent(this, PaymentActivity::class.java)
+            intent.putExtra("TOTAL_BAYAR", hargaMenu)
+            startActivity(intent)
+        }
     }
 }

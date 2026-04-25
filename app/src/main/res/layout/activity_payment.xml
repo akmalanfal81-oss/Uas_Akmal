@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <ImageButton
+            android:id="@+id/btnBackPayment"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_back_arrow"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pembayaran"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="@id/btnBackPayment"
+            app:layout_constraintBottom_toBottomOf="@id/btnBackPayment"
+            app:layout_constraintStart_toEndOf="@id/btnBackPayment" />
+
+        <TextView
+            android:id="@+id/tvLabelTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Tagihan:"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/btnBackPayment"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPaymentTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp 0"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/orange_primary"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelTotal"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLabelMetode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih Metode Pembayaran:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/tvPaymentTotal"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rgPaymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelMetode">
+
+            <RadioButton
+                android:id="@+id/rbBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transfer Bank"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:textColor="@color/white"
+                android:buttonTint="@color/orange_primary"
+                android:background="#2C2C2C" />
+
+            <RadioButton
+                android:id="@+id/rbQris"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="QRIS (Gopay, OVO, Dana)"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:buttonTint="@color/orange_primary"
+                android:background="#2C2C2C" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/layoutBankDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:background="#1A1A1A"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/rgPaymentMethod">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Bank Tujuan:"
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioGroup
+                android:id="@+id/rgBankList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+                <RadioButton android:id="@+id/rbBca" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BCA" android:textColor="@color/white" android:buttonTint="@color/orange_primary" android:layout_marginEnd="16dp"/>
+                <RadioButton android:id="@+id/rbMandiri" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mandiri" android:textColor="@color/white" android:buttonTint="@color/orange_primary" android:layout_marginEnd="16dp"/>
+                <RadioButton android:id="@+id/rbBri" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BRI" android:textColor="@color/white" android:buttonTint="@color/orange_primary"/>
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/etNoRekening"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan No. Rekening Anda"
+                android:textColorHint="#888888"
+                android:textColor="@color/white"
+                android:inputType="number"
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/etNominalBayar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Nominal Pembayaran"
+                android:textColorHint="#888888"
+                android:textColor="@color/white"
+                android:inputType="number"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutQrisDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/layoutBankDetails">
+
+            <TextView
+                android:id="@+id/tvQrisPetunjuk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scan QRIS untuk membayar:"
+                android:textColor="#AAAAAA"
+                android:textAlignment="center"
+                android:layout_marginBottom="16dp"/>
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/logo"
+                android:background="#FFFFFF"
+                android:padding="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnQrisGagal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Simulasi Gagal"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="#D32F2F"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btnQrisBerhasil"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Simulasi Berhasil"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="#388E3C"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnBayarSekarang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lanjutkan Pembayaran"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="#4E342E"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/layoutQrisDetails"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
