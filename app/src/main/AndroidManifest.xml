@@ -54,6 +54,10 @@
             android:name=".PaymentActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
