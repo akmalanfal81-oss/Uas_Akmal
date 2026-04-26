@@ -55,6 +55,7 @@
             android:backgroundTint="@color/orange_primary"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/etPassword"
+            app:layout_constraintBottom_toTopOf="@+id/tvBelumPunyaAkun"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -65,6 +66,7 @@
             android:text="Belum punya akun?"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@id/btnLogin"
+            app:layout_constraintBottom_toTopOf="@+id/tvAtau"
             app:layout_constraintEnd_toStartOf="@+id/tvDaftar"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent" />
@@ -90,6 +92,7 @@
             android:textColor="#888888"
             android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@id/tvBelumPunyaAkun"
+            app:layout_constraintBottom_toTopOf="@+id/btnGoogleLogin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
