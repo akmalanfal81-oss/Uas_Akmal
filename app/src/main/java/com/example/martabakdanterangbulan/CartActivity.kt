@@ -54,7 +54,7 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
-    // FUNGSI KALKULATOR OTOMATIS (SUDAH DIUBAH)
+    // FUNGSI KALKULATOR OTOMATIS
     private fun hitungTotalTagihan() {
         var total = 0
 

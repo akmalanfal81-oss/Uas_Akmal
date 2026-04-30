@@ -33,16 +33,17 @@ class InfoActivity : AppCompatActivity() {
         tvDesc.text = intent.getStringExtra("DESC_MENU")
 
         val btnTambahKeranjang = findViewById<Button>(R.id.btnTambahKeranjang)
-        val btnLihatKeranjang = findViewById<Button>(R.id.btnLihatKeranjang)
         val btnBeliLangsung = findViewById<Button>(R.id.btnBeliLangsung)
+        // PENGENALAN IKON KERANJANG BARU
+        val btnCartInfo = findViewById<ImageButton>(R.id.btnCartInfo)
 
         btnTambahKeranjang.setOnClickListener {
-            // DIUBAH: Sekarang ikut mengirimkan gambarMenu ke keranjang!
             CartManager.cartList.add(CartItem(namaMenu, hargaMenu, gambarMenu))
             Toast.makeText(this, "$namaMenu berhasil masuk keranjang!", Toast.LENGTH_SHORT).show()
         }
 
-        btnLihatKeranjang.setOnClickListener {
+        // KLIK IKON KERANJANG ATAS
+        btnCartInfo.setOnClickListener {
             val intent = Intent(this, CartActivity::class.java)
             startActivity(intent)
         }

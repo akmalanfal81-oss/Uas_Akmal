@@ -2,10 +2,14 @@ package com.example.martabakdanterangbulan
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.Locale
 
 class MenuActivity : AppCompatActivity() {
 
@@ -15,6 +19,7 @@ class MenuActivity : AppCompatActivity() {
 
         val tvKategoriTitle = findViewById<TextView>(R.id.tvKategoriTitle)
         val rvMenu = findViewById<RecyclerView>(R.id.rvMenu)
+        val etSearchMenu = findViewById<EditText>(R.id.etSearchMenu) // Tarik EditText Pencarian
 
         // Menemukan tombol kembali dan memberinya perintah 'finish'
         val btnBackMenu = findViewById<android.widget.ImageButton>(R.id.btnBackMenu)
@@ -168,5 +173,26 @@ class MenuActivity : AppCompatActivity() {
 
         // Letakkan di Rak (RecyclerView)
         rvMenu.adapter = adapterMenu
+
+        // --- FITUR BARU: LOGIKA PENCARIAN (SEARCH) ---
+        etSearchMenu.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val textToSearch = s.toString().lowercase(Locale.getDefault())
+                val filteredList = ArrayList<MenuItem>()
+
+                // Mencocokkan ketikan dengan daftar menu asli
+                for (menu in daftarMenu) {
+                    if (menu.namaMenu.lowercase(Locale.getDefault()).contains(textToSearch)) {
+                        filteredList.add(menu)
+                    }
+                }
+                // Update tampilan list
+                adapterMenu.updateList(filteredList)
+            }
+        })
     }
 }

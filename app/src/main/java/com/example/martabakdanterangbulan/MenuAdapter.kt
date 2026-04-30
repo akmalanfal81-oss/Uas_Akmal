@@ -7,9 +7,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MenuAdapter(private val listMenu: ArrayList<MenuItem>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+// DIUBAH: Ubah 'val' menjadi 'var' agar isi daftar bisa diganti saat mencari
+class MenuAdapter(private var listMenu: ArrayList<MenuItem>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
     var onItemClick: ((MenuItem) -> Unit)? = null
+
+    // FUNGSI BARU: Untuk memperbarui daftar saat pencarian dilakukan
+    fun updateList(newList: ArrayList<MenuItem>) {
+        listMenu = newList
+        notifyDataSetChanged() // Beritahu RecyclerView untuk menggambar ulang
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
@@ -21,7 +28,7 @@ class MenuAdapter(private val listMenu: ArrayList<MenuItem>) : RecyclerView.Adap
         holder.tvName.text = menu.namaMenu
         holder.tvPrice.text = menu.hargaMenu
 
-        // BAGIAN BARU: Memasang gambar ke dalam kotak menu
+        // Memasang gambar ke dalam kotak menu
         holder.ivImage.setImageResource(menu.gambarMenu)
 
         holder.itemView.setOnClickListener {
@@ -36,7 +43,6 @@ class MenuAdapter(private val listMenu: ArrayList<MenuItem>) : RecyclerView.Adap
     class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.tvMenuName)
         val tvPrice: TextView = itemView.findViewById(R.id.tvMenuPrice)
-        // BAGIAN BARU: Mengenalkan ImageView
         val ivImage: ImageView = itemView.findViewById(R.id.ivMenuImage)
     }
 }

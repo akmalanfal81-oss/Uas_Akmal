@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat // Pastikan import ini ada untuk mengatur warna
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // LOGIKA KERANJANG (Buka CartActivity)
+        // Buka Cart
         val btnCart = findViewById<ImageButton>(R.id.btnCart)
         btnCart.setOnClickListener {
             val intent = Intent(this, CartActivity::class.java)
@@ -43,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // --- BAGIAN BARU: Pengecekan Lonceng Otomatis Setiap Kali Halaman Muncul ---
     override fun onResume() {
         super.onResume()
 
@@ -52,19 +52,15 @@ class MainActivity : AppCompatActivity() {
         if (CartManager.adaPesananAktif) {
             // Ubah warna lonceng jadi ORANYE
             btnNotification.setColorFilter(ContextCompat.getColor(this, R.color.orange_primary))
-
-            btnNotification.setOnClickListener {
-                // BUKA HALAMAN STATUS PESANAN
-                val intent = Intent(this, TransactionActivity::class.java)
-                startActivity(intent)
-            }
         } else {
             // Jika tidak ada pesanan, kembalikan warna PUTIH
             btnNotification.setColorFilter(ContextCompat.getColor(this, R.color.white))
+        }
 
-            btnNotification.setOnClickListener {
-                Toast.makeText(this, "Belum ada pesanan yang sedang diproses.", Toast.LENGTH_SHORT).show()
-            }
+        // DIUBAH: Apapun warnanya, klik lonceng akan selalu membuka HistoryActivity
+        btnNotification.setOnClickListener {
+            val intent = Intent(this, HistoryActivity::class.java)
+            startActivity(intent)
         }
     }
 }

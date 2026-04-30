@@ -14,6 +14,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class PaymentActivity : AppCompatActivity() {
@@ -24,12 +26,10 @@ class PaymentActivity : AppCompatActivity() {
         val btnBackPayment = findViewById<ImageButton>(R.id.btnBackPayment)
         btnBackPayment.setOnClickListener { finish() }
 
-        // Menerima total harga
         val totalBayar = intent.getStringExtra("TOTAL_BAYAR") ?: "Rp 0"
         val tvPaymentTotal = findViewById<TextView>(R.id.tvPaymentTotal)
         tvPaymentTotal.text = totalBayar
 
-        // Variabel elemen
         val rgPaymentMethod = findViewById<RadioGroup>(R.id.rgPaymentMethod)
         val layoutBankDetails = findViewById<LinearLayout>(R.id.layoutBankDetails)
         val layoutQrisDetails = findViewById<LinearLayout>(R.id.layoutQrisDetails)
@@ -37,7 +37,6 @@ class PaymentActivity : AppCompatActivity() {
         val etNoRekening = findViewById<EditText>(R.id.etNoRekening)
         val etNominalBayar = findViewById<EditText>(R.id.etNominalBayar)
         val tvQrisPetunjuk = findViewById<TextView>(R.id.tvQrisPetunjuk)
-
         val btnBayarSekarang = findViewById<Button>(R.id.btnBayarSekarang)
         val btnQrisBerhasil = findViewById<Button>(R.id.btnQrisBerhasil)
         val btnQrisGagal = findViewById<Button>(R.id.btnQrisGagal)
@@ -49,7 +48,6 @@ class PaymentActivity : AppCompatActivity() {
             private var current = ""
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
             override fun afterTextChanged(s: Editable?) {
                 if (s.toString() != current) {
                     etNominalBayar.removeTextChangedListener(this)
@@ -69,7 +67,6 @@ class PaymentActivity : AppCompatActivity() {
             }
         })
 
-        // LOGIKA TAMPILAN METODE
         rgPaymentMethod.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == R.id.rbBank) {
                 layoutBankDetails.visibility = View.VISIBLE
@@ -83,30 +80,55 @@ class PaymentActivity : AppCompatActivity() {
             }
         }
 
-        // --- FUNGSI BARU: PROSES DATA PESANAN SEBELUM PINDAH HALAMAN ---
+        // --- FUNGSI UPDATE: MENYIMPAN KE RIWAYAT & STATUS PESANAN ---
         fun prosesPesananSelesai() {
-            // Ambil barang yang di-ceklis dari keranjang
             val pesananTerpilih = CartManager.cartList.filter { it.isSelected }
 
+            // 1. SIMPAN DATA KE HALAMAN STATUS (Ini yang sebelumnya terhapus)
             CartManager.pesananAktifList.clear()
             if (pesananTerpilih.isNotEmpty()) {
                 CartManager.pesananAktifList.addAll(pesananTerpilih)
             } else {
-                // Jika dari tombol "Beli Langsung" (Keranjang kosong)
+                // Jika langsung Beli Sekarang tanpa keranjang
                 CartManager.pesananAktifList.add(CartItem("Pesanan Langsung", totalBayar, R.drawable.logo, 1, true))
             }
-
-            CartManager.clearCart() // Kosongkan keranjang asli
-            CartManager.adaPesananAktif = true
             CartManager.totalBayarAktif = totalBayar
+            CartManager.adaPesananAktif = true
 
+            // 2. SIMPAN DATA KE HALAMAN RIWAYAT
+            val sdf = SimpleDateFormat("dd MMM yyyy", Locale("id", "ID"))
+            val currentDate = sdf.format(Date())
+
+            val gambarMenu = if(pesananTerpilih.isNotEmpty()) pesananTerpilih[0].gambarMenu else R.drawable.logo
+            val namaMenuUtama = if(pesananTerpilih.isNotEmpty()) pesananTerpilih[0].namaMenu else "Pesanan Langsung"
+
+            var totalMenu = 0
+            if(pesananTerpilih.isNotEmpty()){
+                totalMenu = pesananTerpilih.sumOf { it.jumlah }
+            } else {
+                totalMenu = 1
+            }
+
+            CartManager.orderHistoryList.add(0, OrderHistoryItem(
+                namaToko = "Martabak & Terang Bulan Nusantara",
+                deskripsiMenuUtama = namaMenuUtama,
+                tanggal = currentDate,
+                totalHarga = totalBayar,
+                jumlahMenu = totalMenu,
+                gambarMenu = gambarMenu,
+                status = "Sedang Diproses"
+            ))
+
+            // 3. KOSONGKAN KERANJANG DAN PINDAH HALAMAN
+            CartManager.clearCart()
+
+            Toast.makeText(this, "Pembayaran Berhasil!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
         }
 
-        // LOGIKA BAYAR BANK
         btnBayarSekarang.setOnClickListener {
             if (rgPaymentMethod.checkedRadioButtonId == -1) {
                 Toast.makeText(this, "Pilih metode pembayaran dulu!", Toast.LENGTH_SHORT).show()
@@ -122,14 +144,13 @@ class PaymentActivity : AppCompatActivity() {
                 } else if (inputNominalBersih != angkaTagihanMurni) {
                     Toast.makeText(this, "Gagal! Nominal harus pas: Rp $angkaTagihanMurni", Toast.LENGTH_LONG).show()
                 } else {
-                    prosesPesananSelesai() // Panggil fungsi di atas
+                    prosesPesananSelesai()
                 }
             }
         }
 
-        // SIMULASI QRIS BERHASIL
         btnQrisBerhasil.setOnClickListener {
-            prosesPesananSelesai() // Panggil fungsi di atas
+            prosesPesananSelesai()
         }
 
         btnQrisGagal.setOnClickListener {

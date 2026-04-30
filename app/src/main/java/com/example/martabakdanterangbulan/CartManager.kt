@@ -1,21 +1,25 @@
 package com.example.martabakdanterangbulan
 
 object CartManager {
-    // List ini akan menyimpan semua pesanan user di keranjang
+    // List pesanan keranjang saat ini
     val cartList = ArrayList<CartItem>()
 
-    // --- VARIABEL BARU UNTUK STATUS PESANAN ---
+    // List untuk menyimpan Riwayat Pesanan (ShopeeFood style)
+    val orderHistoryList = ArrayList<OrderHistoryItem>()
+
+    // --- VARIABEL UNTUK STATUS PESANAN (JANGAN DIHAPUS) ---
     var adaPesananAktif: Boolean = false
     var totalBayarAktif: String = "Rp 0"
 
-    // Data dummy pelanggan (Bisa diganti nanti jika ada fitur Login/Database asli)
+    // Data dummy pelanggan
     var namaPelangganAktif: String = "Akmal"
     var alamatPelangganAktif: String = "Jl. Teknologi No. 1, Kota Surabaya"
 
-    // Menyimpan daftar item yang sudah dibayar
+    // Menyimpan daftar item yang sedang diproses saat ini
     val pesananAktifList = ArrayList<CartItem>()
+    // ------------------------------------------------------
 
-    // Fungsi untuk mengosongkan keranjang setelah selesai transaksi
+    // Fungsi untuk mengosongkan keranjang
     fun clearCart() {
         cartList.clear()
     }
