@@ -3,40 +3,171 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp">
+    android:background="#121212">
 
-    <TextView
-        android:id="@+id/tvSukses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🎉 Transaksi Berhasil! 🎉"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/orange_primary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvMakasih"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/tvMakasih"
+    <!-- HEADER -->
+    <LinearLayout
+        android:id="@+id/headerStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pesananmu sedang diproses oleh dapur kami. Mohon ditunggu ya!"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSukses"
-        app:layout_constraintBottom_toTopOf="@id/btnSelesai" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBackStatus"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_back_arrow"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status Pesanan"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/headerStatus"
+        app:layout_constraintBottom_toTopOf="@id/btnSelesai">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="👨‍🍳 Sedang Diproses"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/orange_primary"
+                android:textAlignment="center"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pesananmu sedang disiapkan. Mohon ditunggu ya!"
+                android:textColor="#AAAAAA"
+                android:textAlignment="center"
+                android:layout_marginBottom="32dp"/>
+
+            <!-- KARTU INFORMASI PENGIRIMAN -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#2C2C2C"
+                app:cardCornerRadius="12dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Informasi Pengiriman"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/tvNamaPelanggan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Pengguna"
+                        android:textColor="#DDDDDD"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvAlamatPelanggan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Alamat Pengguna"
+                        android:textColor="#AAAAAA"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- KARTU DAFTAR PESANAN & HARGA -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#2C2C2C"
+                app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detail Pesanan"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:id="@+id/tvDaftarPesanan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1x Martabak Telur"
+                        android:textColor="#DDDDDD"
+                        android:lineSpacingExtra="6dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#444444"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Pembayaran"
+                        android:textColor="#AAAAAA"/>
+
+                    <TextView
+                        android:id="@+id/tvTotalBayarStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rp 0"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="#388E3C"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnSelesai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Kembali ke Halaman Utama"
-        android:layout_marginTop="48dp"
-        app:layout_constraintTop_toBottomOf="@id/tvMakasih"
+        android:layout_margin="16dp"
+        android:text="Pesanan Sudah Diterima"
+        android:backgroundTint="#388E3C"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

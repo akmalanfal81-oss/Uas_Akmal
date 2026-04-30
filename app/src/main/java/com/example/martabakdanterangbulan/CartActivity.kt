@@ -54,7 +54,7 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
-    // FUNGSI KALKULATOR OTOMATIS
+    // FUNGSI KALKULATOR OTOMATIS (SUDAH DIUBAH)
     private fun hitungTotalTagihan() {
         var total = 0
 
@@ -62,7 +62,9 @@ class CartActivity : AppCompatActivity() {
             // HANYA MENGHITUNG MENU YANG DICEKLIS SAJA
             if (item.isSelected) {
                 val hargaAngka = item.hargaMenu.replace(Regex("[^0-9]"), "").toIntOrNull() ?: 0
-                total += hargaAngka
+
+                // DIUBAH: Harga dikalikan dengan jumlah pesanan!
+                total += (hargaAngka * item.jumlah)
             }
         }
 

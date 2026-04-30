@@ -20,12 +20,11 @@ class InfoActivity : AppCompatActivity() {
         val tvNama = findViewById<TextView>(R.id.tvInfoNamaMenu)
         val tvHarga = findViewById<TextView>(R.id.tvInfoHargaMenu)
         val tvDesc = findViewById<TextView>(R.id.tvInfoDeskripsi)
-        val ivGambar = findViewById<ImageView>(R.id.ivInfoGambar) // Menemukan gambar
+        val ivGambar = findViewById<ImageView>(R.id.ivInfoGambar)
 
         val namaMenu = intent.getStringExtra("NAMA_MENU") ?: ""
         val hargaMenu = intent.getStringExtra("HARGA_MENU") ?: ""
 
-        // BAGIAN BARU: Menangkap gambar dan memasangnya
         val gambarMenu = intent.getIntExtra("GAMBAR_MENU", R.drawable.logo)
         ivGambar.setImageResource(gambarMenu)
 
@@ -38,7 +37,8 @@ class InfoActivity : AppCompatActivity() {
         val btnBeliLangsung = findViewById<Button>(R.id.btnBeliLangsung)
 
         btnTambahKeranjang.setOnClickListener {
-            CartManager.cartList.add(CartItem(namaMenu, hargaMenu))
+            // DIUBAH: Sekarang ikut mengirimkan gambarMenu ke keranjang!
+            CartManager.cartList.add(CartItem(namaMenu, hargaMenu, gambarMenu))
             Toast.makeText(this, "$namaMenu berhasil masuk keranjang!", Toast.LENGTH_SHORT).show()
         }
 

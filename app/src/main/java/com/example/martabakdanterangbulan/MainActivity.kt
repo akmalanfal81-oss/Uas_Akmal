@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,11 +35,36 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // LOGIKA LONCENG (Buka Keranjang Langsung)
-        val btnCartBell = findViewById<ImageButton>(R.id.btnCartBell)
-        btnCartBell.setOnClickListener {
+        // LOGIKA KERANJANG (Buka CartActivity)
+        val btnCart = findViewById<ImageButton>(R.id.btnCart)
+        btnCart.setOnClickListener {
             val intent = Intent(this, CartActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val btnNotification = findViewById<ImageButton>(R.id.btnNotification)
+
+        // Cek apakah ada notifikasi pesanan
+        if (CartManager.adaPesananAktif) {
+            // Ubah warna lonceng jadi ORANYE
+            btnNotification.setColorFilter(ContextCompat.getColor(this, R.color.orange_primary))
+
+            btnNotification.setOnClickListener {
+                // BUKA HALAMAN STATUS PESANAN
+                val intent = Intent(this, TransactionActivity::class.java)
+                startActivity(intent)
+            }
+        } else {
+            // Jika tidak ada pesanan, kembalikan warna PUTIH
+            btnNotification.setColorFilter(ContextCompat.getColor(this, R.color.white))
+
+            btnNotification.setOnClickListener {
+                Toast.makeText(this, "Belum ada pesanan yang sedang diproses.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

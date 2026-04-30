@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
     app:cardBackgroundColor="#2C2C2C">
 
@@ -20,7 +20,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/custom_checkbox"
-            android:buttonTint="@null"          app:buttonTint="@null"              android:scaleX="1.3"                android:scaleY="1.3"                android:layout_marginEnd="16dp" />
+            android:buttonTint="@null"
+            app:buttonTint="@null"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_marginEnd="12dp" />
+
+        <!-- BINGKAI GAMBAR MENU -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:cardCornerRadius="8dp"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/ivCartImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo" />
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -44,6 +63,63 @@
                 android:text="Rp 0"
                 android:textColor="@color/orange_primary"
                 android:layout_marginTop="4dp" />
+
+            <!-- PENGATUR JUMLAH (PLUS MINUS) -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btnMinus"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:text="-"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="#444444"
+                    android:padding="0dp"
+                    app:iconPadding="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
+
+                <TextView
+                    android:id="@+id/tvCartJumlah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp" />
+
+                <Button
+                    android:id="@+id/btnPlus"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:text="+"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/orange_primary"
+                    android:padding="0dp"
+                    app:iconPadding="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
+            </LinearLayout>
         </LinearLayout>
+
+        <!-- TOMBOL HAPUS (BARU) -->
+        <ImageButton
+            android:id="@+id/btnDeleteCartItem"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="top"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_delete"
+            app:tint="#D32F2F" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
