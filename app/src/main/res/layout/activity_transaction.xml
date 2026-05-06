@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#121212"
-    android:fitsSystemWindows="true"> <!-- INI KODE AJAIBNYA -->
+    android:fitsSystemWindows="true">
 
     <!-- HEADER PESANAN SAYA -->
     <LinearLayout
@@ -47,7 +47,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- TIMELINE STATUS (BARU) -->
+            <!-- TIMELINE STATUS -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,6 +69,7 @@
                         android:layout_marginBottom="4dp"/>
 
                     <TextView
+                        android:id="@+id/tvStatusTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Menyiapkan Pesananmu..."
@@ -78,6 +79,7 @@
                         android:layout_marginBottom="4dp"/>
 
                     <TextView
+                        android:id="@+id/tvStatusDesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Estimasi tiba: 15 - 20 Menit"
@@ -85,17 +87,28 @@
                         android:textSize="14sp"
                         android:layout_marginBottom="16dp"/>
 
-                    <!-- ILUSTRASI TIMELINE -->
+                    <!-- ILUSTRASI TIMELINE (DIUBAH) -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
-                        <TextView android:text="📝" android:textSize="22sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <View android:layout_width="0dp" android:layout_height="3dp" android:layout_weight="1" android:background="@color/orange_primary" android:layout_marginHorizontal="8dp"/>
-                        <TextView android:text="👨‍🍳" android:textSize="28sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <View android:layout_width="0dp" android:layout_height="3dp" android:layout_weight="1" android:background="#444444" android:layout_marginHorizontal="8dp"/>
-                        <TextView android:text="🛵" android:textSize="22sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:alpha="0.3"/>
+
+                        <TextView android:text="📝" android:textSize="20sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+                        <View android:layout_width="0dp" android:layout_height="3dp" android:layout_weight="1" android:background="@color/orange_primary" android:layout_marginHorizontal="6dp"/>
+
+                        <TextView android:id="@+id/tvIconChef" android:text="👨‍🍳" android:textSize="24sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+                        <View android:id="@+id/viewLine2" android:layout_width="0dp" android:layout_height="3dp" android:layout_weight="1" android:background="#444444" android:layout_marginHorizontal="6dp"/>
+
+                        <TextView android:id="@+id/tvIconBike" android:text="🛵" android:textSize="20sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:alpha="0.3"/>
+
+                        <!-- TAMBAHAN BARU: GARIS 3 & IKON RUMAH -->
+                        <View android:id="@+id/viewLine3" android:layout_width="0dp" android:layout_height="3dp" android:layout_weight="1" android:background="#444444" android:layout_marginHorizontal="6dp"/>
+
+                        <TextView android:id="@+id/tvIconHome" android:text="🏠" android:textSize="20sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:alpha="0.3"/>
+
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -175,7 +188,7 @@
                         android:textColor="@color/white"
                         android:layout_marginBottom="16dp"/>
 
-                    <!-- TEMPAT MUNCULNYA ITEM PESANAN DENGAN GAMBAR (DARI KOTLIN) -->
+                    <!-- TEMPAT MUNCULNYA ITEM PESANAN DENGAN GAMBAR -->
                     <LinearLayout
                         android:id="@+id/llDaftarPesanan"
                         android:layout_width="match_parent"
