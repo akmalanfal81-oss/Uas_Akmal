@@ -75,9 +75,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // ==========================================
         // PERBAIKAN KLIK TOMBOL LAPORAN
-        // ==========================================
         val btnLaporan = findViewById<Button>(R.id.btnLaporan)
         btnLaporan.setOnClickListener {
             val intent = Intent(this, ReportActivity::class.java)

@@ -53,7 +53,7 @@ class CartAdapter(
             }
         }
 
-        // --- LOGIKA BARU: TOMBOL HAPUS ---
+        // --- LOGIKA: TOMBOL HAPUS ---
         holder.btnDelete.setOnClickListener {
             val currentPos = holder.adapterPosition
             if (currentPos != RecyclerView.NO_POSITION) {

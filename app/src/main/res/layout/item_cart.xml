@@ -111,7 +111,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- TOMBOL HAPUS (BARU) -->
+        <!-- TOMBOL HAPUS  -->
         <ImageButton
             android:id="@+id/btnDeleteCartItem"
             android:layout_width="32dp"

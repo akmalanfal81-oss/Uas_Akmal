@@ -58,7 +58,7 @@ class MenuActivity : AppCompatActivity() {
 
         } else if (kategoriDipilih == "TOPING_ORIGINAL") {
             tvKategoriTitle.text = "Toping - Adonan Original"
-            val img = R.drawable.terang_bulan_original // Gambar Terbul Ori
+            val img = R.drawable.terang_bulan_original // Gambar Terang Bulan Original
 
             daftarMenu.add(MenuItem("Original Coklat Susu", "Rp 16.000", img))
             daftarMenu.add(MenuItem("Original Kacang Susu", "Rp 18.000", img))
@@ -83,7 +83,7 @@ class MenuActivity : AppCompatActivity() {
 
         } else if (kategoriDipilih == "TOPING_PANDAN") {
             tvKategoriTitle.text = "Toping - Adonan Pandan"
-            val img = R.drawable.terang_bulan_pandan // Gambar Terbul Pandan
+            val img = R.drawable.terang_bulan_pandan // Gambar Terang Bulan Pandan
 
             daftarMenu.add(MenuItem("Pandan Coklat Susu", "Rp 18.000", img))
             daftarMenu.add(MenuItem("Pandan Kacang Susu", "Rp 20.000", img))
@@ -108,7 +108,7 @@ class MenuActivity : AppCompatActivity() {
 
         } else if (kategoriDipilih == "TOPING_RED_VELVET") {
             tvKategoriTitle.text = "Toping - Adonan Red Velvet"
-            val img = R.drawable.terang_bulan_red_velvet // Gambar Terbul Red Velvet
+            val img = R.drawable.terang_bulan_red_velvet // Gambar Terang Bulan Red Velvet
 
             daftarMenu.add(MenuItem("Red Velvet Coklat Susu", "Rp 20.000", img))
             daftarMenu.add(MenuItem("Red Velvet Kacang Susu", "Rp 22.000", img))

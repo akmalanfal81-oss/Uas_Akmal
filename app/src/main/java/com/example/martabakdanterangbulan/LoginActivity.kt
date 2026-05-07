@@ -52,9 +52,7 @@ class LoginActivity : AppCompatActivity() {
         val tvDaftar = findViewById<TextView>(R.id.tvDaftar)
         val btnGoogleLogin = findViewById<Button>(R.id.btnGoogleLogin)
 
-        // ---------------------------------------------------------
         // KONFIGURASI GOOGLE SIGN-IN
-        // ---------------------------------------------------------
         // Minta sistem untuk mengambil Email dan Profil Dasar (Nama/Foto)
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()

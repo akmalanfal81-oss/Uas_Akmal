@@ -34,7 +34,7 @@ class InfoActivity : AppCompatActivity() {
 
         val btnTambahKeranjang = findViewById<Button>(R.id.btnTambahKeranjang)
         val btnBeliLangsung = findViewById<Button>(R.id.btnBeliLangsung)
-        // PENGENALAN IKON KERANJANG BARU
+        // IKON KERANJANG
         val btnCartInfo = findViewById<ImageButton>(R.id.btnCartInfo)
 
         btnTambahKeranjang.setOnClickListener {

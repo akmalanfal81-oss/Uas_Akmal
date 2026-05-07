@@ -22,7 +22,7 @@ class HistoryActivity : AppCompatActivity() {
         // Tampilkan data dari memori
         val adapter = OrderHistoryAdapter(CartManager.orderHistoryList)
 
-        // JIKA KOTAK RIWAYAT DIKLIK -> BUKA STATUS DETAIL
+        // BUKA STATUS DETAIL
         adapter.onItemClick = { clickedItem ->
             val intent = Intent(this, TransactionActivity::class.java)
             startActivity(intent)
