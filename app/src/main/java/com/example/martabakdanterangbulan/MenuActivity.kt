@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -19,27 +20,26 @@ class MenuActivity : AppCompatActivity() {
 
         val tvKategoriTitle = findViewById<TextView>(R.id.tvKategoriTitle)
         val rvMenu = findViewById<RecyclerView>(R.id.rvMenu)
-        val etSearchMenu = findViewById<EditText>(R.id.etSearchMenu) // Tarik EditText Pencarian
+        val etSearchMenu = findViewById<EditText>(R.id.etSearchMenu)
 
-        // Menemukan tombol kembali dan memberinya perintah 'finish'
+        // Panggil Tombol Sorting Harga
+        val btnSortMurah = findViewById<Button>(R.id.btnSortMurah)
+        val btnSortMahal = findViewById<Button>(R.id.btnSortMahal)
+
         val btnBackMenu = findViewById<android.widget.ImageButton>(R.id.btnBackMenu)
         btnBackMenu.setOnClickListener {
-            finish() // Menutup halaman Menu dan kembali ke halaman sebelumnya
+            finish()
         }
 
-        // Mengatur agar daftar menu memanjang ke bawah (vertikal)
         rvMenu.layoutManager = LinearLayoutManager(this)
 
-        // Menangkap pesan Intent
         val kategoriDipilih = intent.getStringExtra("KATEGORI")
 
-        // Menyiapkan keranjang kosong menggunakan struktur MenuItem
         val daftarMenu = ArrayList<MenuItem>()
 
-        // Mengisi keranjang sesuai tombol atau menu yang diklik
         if (kategoriDipilih == "MARTABAK") {
             tvKategoriTitle.text = "Daftar Menu Martabak"
-            val img = R.drawable.martabak_telur // Gambar Martabak
+            val img = R.drawable.martabak_telur
 
             daftarMenu.add(MenuItem("Martabak Telur Biasa", "Rp 25.000", img))
             daftarMenu.add(MenuItem("Martabak Telur Biasa + Keju", "Rp 30.000", img))
@@ -58,7 +58,7 @@ class MenuActivity : AppCompatActivity() {
 
         } else if (kategoriDipilih == "TOPING_ORIGINAL") {
             tvKategoriTitle.text = "Toping - Adonan Original"
-            val img = R.drawable.terang_bulan_original // Gambar Terang Bulan Original
+            val img = R.drawable.terang_bulan_original
 
             daftarMenu.add(MenuItem("Original Coklat Susu", "Rp 16.000", img))
             daftarMenu.add(MenuItem("Original Kacang Susu", "Rp 18.000", img))
@@ -83,7 +83,7 @@ class MenuActivity : AppCompatActivity() {
 
         } else if (kategoriDipilih == "TOPING_PANDAN") {
             tvKategoriTitle.text = "Toping - Adonan Pandan"
-            val img = R.drawable.terang_bulan_pandan // Gambar Terang Bulan Pandan
+            val img = R.drawable.terang_bulan_pandan
 
             daftarMenu.add(MenuItem("Pandan Coklat Susu", "Rp 18.000", img))
             daftarMenu.add(MenuItem("Pandan Kacang Susu", "Rp 20.000", img))
@@ -108,7 +108,7 @@ class MenuActivity : AppCompatActivity() {
 
         } else if (kategoriDipilih == "TOPING_RED_VELVET") {
             tvKategoriTitle.text = "Toping - Adonan Red Velvet"
-            val img = R.drawable.terang_bulan_red_velvet // Gambar Terang Bulan Red Velvet
+            val img = R.drawable.terang_bulan_red_velvet
 
             daftarMenu.add(MenuItem("Red Velvet Coklat Susu", "Rp 20.000", img))
             daftarMenu.add(MenuItem("Red Velvet Kacang Susu", "Rp 22.000", img))
@@ -132,25 +132,71 @@ class MenuActivity : AppCompatActivity() {
             daftarMenu.add(MenuItem("Red Velvet Komplit", "Rp 46.000", img))
         }
 
-        // TAHAP SEBELUM ADAPTER: Masukkan deskripsi otomatis ke semua menu
         val descMartabak = "Martabak telur gurih dengan isian daging cincang, potongan daun bawang segar, dan bumbu rempah pilihan. Digoreng garing dengan balutan kulit lumpia renyah. Disajikan dengan kuah cuka (cuko) dan acar mentimun."
         val descTerbul = "Terang bulan manis bersarang sempurna. Terbuat dari adonan tepung premium, telur, dan mentega wangi. Disajikan dengan olesan mentega dan isian toping yang sangat melimpah."
 
         for (kue in daftarMenu) {
             if (kategoriDipilih == "MARTABAK") {
                 kue.deskripsiMenu = descMartabak
-            } else if (kategoriDipilih != "TERANGBULAN") { // Ini berarti pilihan Toping akhir
+            } else if (kategoriDipilih != "TERANGBULAN") {
                 kue.deskripsiMenu = descTerbul
             }
         }
 
-        // Nyalakan mesin Adapter
         val adapterMenu = MenuAdapter(daftarMenu)
 
-        // MENANGKAP KLIK DARI KOTAK MENU
+        // ==============================================================
+        // IMPLEMENTASI MODUL 7: BUBBLE SORT + EFEK WARNA TOMBOL
+        // ==============================================================
+
+        // Siapkan warna dari sistem agar kita bisa menukarnya saat diklik
+        val warnaAktif = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#F57C00")) // Warna Oranye Terang
+        val warnaPasif = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#4E342E")) // Warna Coklat Gelap
+
+        fun performBubbleSortByPrice(termurahDulu: Boolean) {
+            val n = daftarMenu.size
+            for (i in 0 until n - 1) {
+                for (j in 0 until n - i - 1) {
+
+                    // Ekstrak angka dari String harga (Contoh: "Rp 25.000" jadi 25000)
+                    val harga1 = daftarMenu[j].hargaMenu.replace(Regex("[^0-9]"), "").toIntOrNull() ?: 0
+                    val harga2 = daftarMenu[j + 1].hargaMenu.replace(Regex("[^0-9]"), "").toIntOrNull() ?: 0
+
+                    // Cek kondisi tukar berdasarkan Harga
+                    val harusDitukar = if (termurahDulu) {
+                        harga1 > harga2 // Urutkan Murah ke Mahal
+                    } else {
+                        harga1 < harga2 // Urutkan Mahal ke Murah
+                    }
+
+                    if (harusDitukar) {
+                        // Proses Swapping
+                        val temp = daftarMenu[j]
+                        daftarMenu[j] = daftarMenu[j + 1]
+                        daftarMenu[j + 1] = temp
+                    }
+                }
+            }
+            // Segarkan list di layar
+            adapterMenu.updateList(daftarMenu)
+        }
+
+        // Hubungkan tombol dengan fungsinya & Ganti Warnanya saat diklik
+        btnSortMurah.setOnClickListener {
+            performBubbleSortByPrice(true)
+            btnSortMurah.backgroundTintList = warnaAktif  // Termurah jadi Oranye (Aktif)
+            btnSortMahal.backgroundTintList = warnaPasif  // Termahal jadi Coklat (Pasif)
+        }
+
+        btnSortMahal.setOnClickListener {
+            performBubbleSortByPrice(false)
+            btnSortMahal.backgroundTintList = warnaAktif  // Termahal jadi Oranye (Aktif)
+            btnSortMurah.backgroundTintList = warnaPasif  // Termurah jadi Coklat (Pasif)
+        }
+        // ==============================================================
+
         adapterMenu.onItemClick = { menuYangDiklik ->
             if (kategoriDipilih == "TERANGBULAN") {
-                // Pindah ke pilihan toping (ini tetap jalan seperti biasa)
                 val intentBaru = Intent(this, MenuActivity::class.java)
                 if (menuYangDiklik.namaMenu.contains("Original")) {
                     intentBaru.putExtra("KATEGORI", "TOPING_ORIGINAL")
@@ -161,36 +207,30 @@ class MenuActivity : AppCompatActivity() {
                 }
                 startActivity(intentBaru)
             } else {
-                // BUKA HALAMAN INFO PRODUK KARENA MENU AKHIR DIKLIK
                 val intentInfo = Intent(this, InfoActivity::class.java)
                 intentInfo.putExtra("NAMA_MENU", menuYangDiklik.namaMenu)
                 intentInfo.putExtra("HARGA_MENU", menuYangDiklik.hargaMenu)
                 intentInfo.putExtra("DESC_MENU", menuYangDiklik.deskripsiMenu)
-                intentInfo.putExtra("GAMBAR_MENU", menuYangDiklik.gambarMenu) // <-- KIRIM GAMBAR KE INFO
+                intentInfo.putExtra("GAMBAR_MENU", menuYangDiklik.gambarMenu)
                 startActivity(intentInfo)
             }
         }
 
-        // Letakkan di Rak (RecyclerView)
         rvMenu.adapter = adapterMenu
 
-        // --- FITUR BARU: LOGIKA PENCARIAN (SEARCH) ---
+        // IMPLEMENTASI MODUL 6: PENCARIAN DATA (LINEAR SEARCH)
         etSearchMenu.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
             override fun afterTextChanged(s: Editable?) {
                 val textToSearch = s.toString().lowercase(Locale.getDefault())
                 val filteredList = ArrayList<MenuItem>()
 
-                // Mencocokkan ketikan dengan daftar menu asli
                 for (menu in daftarMenu) {
                     if (menu.namaMenu.lowercase(Locale.getDefault()).contains(textToSearch)) {
                         filteredList.add(menu)
                     }
                 }
-                // Update tampilan list
                 adapterMenu.updateList(filteredList)
             }
         })

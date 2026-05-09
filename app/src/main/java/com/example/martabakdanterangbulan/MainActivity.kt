@@ -3,6 +3,7 @@ package com.example.martabakdanterangbulan
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log // <-- IMPORT LOG
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -10,9 +11,22 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private val TAG_NIM = "42430041"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // 1. Log.d (DEBUG) - Merekam saat halaman utama pertama kali dibuat
+        Log.d(TAG_NIM, "Log.d: [DEBUG] MainActivity berhasil dibuat (onCreate).")
+
+        try {
+            // Kita membuat simulasi error matematika (dibagi nol) secara sengaja
+            val simulasiError = 100 / 0
+        } catch (e: Exception) {
+            // 2. Log.e (ERROR) - Menangkap dan merekam pesan error ke sistem
+            Log.e(TAG_NIM, "Log.e: [ERROR TERKENDALI] Terjadi kesalahan: ${e.message}")
+        }
 
         val btnMartabak = findViewById<Button>(R.id.btnKategoriMartabak)
         val btnTerangBulan = findViewById<Button>(R.id.btnKategoriTerangBulan)
@@ -75,16 +89,24 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // PERBAIKAN KLIK TOMBOL LAPORAN
         val btnLaporan = findViewById<Button>(R.id.btnLaporan)
-        btnLaporan.setOnClickListener {
+        btnLaporan?.setOnClickListener {
             val intent = Intent(this, ReportActivity::class.java)
             startActivity(intent)
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        // 3. Log.i (INFO) - Merekam saat aplikasi mulai terlihat
+        Log.i(TAG_NIM, "Log.i: [INFO] Aplikasi bersiap ditampilkan di layar.")
+    }
+
     override fun onResume() {
         super.onResume()
+
+        Log.i(TAG_NIM, "Log.i: [INFO] Aplikasi sedang aktif digunakan oleh User.")
+
         val btnNotification = findViewById<ImageButton>(R.id.btnNotification)
 
         if (CartManager.adaPesananAktif) {
@@ -97,5 +119,21 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, HistoryActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // 4. Log.w (WARNING) - Peringatan saat aplikasi mulai ditinggalkan / masuk latar belakang
+        Log.w(TAG_NIM, "Log.w: [WARNING] User berpindah aplikasi! MainActivity masuk ke Background (onPause).")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.w(TAG_NIM, "Log.w: [WARNING] MainActivity sudah sepenuhnya di Background (onStop).")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG_NIM, "Log.d: [DEBUG] MainActivity ditutup / dihancurkan oleh sistem.")
     }
 }

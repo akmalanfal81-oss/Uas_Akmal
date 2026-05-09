@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#121212"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -34,7 +35,6 @@
             android:layout_marginStart="16dp" />
     </LinearLayout>
 
-    <!-- KOLOM PENCARIAN BARU -->
     <EditText
         android:id="@+id/etSearchMenu"
         android:layout_width="match_parent"
@@ -50,12 +50,55 @@
         android:maxLines="1"
         app:layout_constraintTop_toBottomOf="@id/headerMenu" />
 
+    <LinearLayout
+        android:id="@+id/llSortOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/etSearchMenu">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Urutkan Harga:"
+            android:textColor="#AAAAAA"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnSortMurah"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Termurah"
+            android:textSize="12sp"
+            android:backgroundTint="#F57C00"
+            android:textColor="@color/white"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnSortMahal"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Termahal"
+            android:textSize="12sp"
+            android:backgroundTint="#4E342E"
+            android:textColor="@color/white"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"/>
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMenu"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/etSearchMenu"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/llSortOptions"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

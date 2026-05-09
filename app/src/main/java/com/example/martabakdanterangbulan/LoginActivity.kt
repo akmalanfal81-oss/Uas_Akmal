@@ -3,6 +3,7 @@ package com.example.martabakdanterangbulan
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log // <-- IMPORT LOG
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -16,27 +17,22 @@ import com.google.android.gms.common.api.ApiException
 
 class LoginActivity : AppCompatActivity() {
 
-    // Siapkan variabel untuk mesin Google Sign-In
     private lateinit var googleSignInClient: GoogleSignInClient
 
-    // Mesin penangkap hasil setelah pengguna memilih akun Google
     private val googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
-                // Berhasil mendapatkan akun Google!
                 val account = task.getResult(ApiException::class.java)
                 val emailGoogle = account?.email
                 val namaGoogle = account?.displayName
 
-                // Tampilkan pesan selamat datang dan langsung pindah ke MainActivity
                 Toast.makeText(this, "Berhasil masuk sebagai $namaGoogle ($emailGoogle)", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish() // Tutup halaman login
+                finish()
 
             } catch (e: ApiException) {
-                // Gagal masuk (misalnya pengguna membatalkan pilihan akun)
                 Toast.makeText(this, "Login Google dibatalkan atau gagal.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -46,21 +42,27 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // ==========================================
+        // DIPINDAHKAN KE SINI!
+        // Log langsung tercetak otomatis tanpa nunggu tombol diklik!
+        // ==========================================
+        val nimSaya = "42430041"
+        val namaSaya = "Akmal"
+        Log.e("INFO_MAHASISWA", "====== HALO DOSEN! APLIKASI DIJALANKAN OLEH: $namaSaya (NIM: $nimSaya) ======")
+        // ==========================================
+
         val etUsername = findViewById<EditText>(R.id.etUsername)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val tvDaftar = findViewById<TextView>(R.id.tvDaftar)
         val btnGoogleLogin = findViewById<Button>(R.id.btnGoogleLogin)
 
-        // KONFIGURASI GOOGLE SIGN-IN
-        // Minta sistem untuk mengambil Email dan Profil Dasar (Nama/Foto)
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .requestProfile()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        // Jika sebelumnya sudah pernah login Google, otomatiskan masuk tanpa klik tombol
         val akunTerakhir = GoogleSignIn.getLastSignedInAccount(this)
         if (akunTerakhir != null) {
             val intent = Intent(this, MainActivity::class.java)
@@ -68,8 +70,6 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-
-        // 1. LOGIKA MASUK BIASA (Email & Password)
         btnLogin.setOnClickListener {
             val email = etUsername.text.toString().trim()
             val password = etPassword.text.toString().trim()
@@ -88,15 +88,12 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // 2. LOGIKA DAFTAR AKUN BARU
         tvDaftar.setOnClickListener {
-            // Berpindah dari LoginActivity ke RegisterActivity
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-        // 3. LOGIKA MASUK DENGAN GOOGLE (INSTAN)
+
         btnGoogleLogin.setOnClickListener {
-            // Panggil halaman bawaan HP untuk memilih akun Google
             val signInIntent = googleSignInClient.signInIntent
             googleSignInLauncher.launch(signInIntent)
         }
