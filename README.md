@@ -26,9 +26,11 @@ Isi dari aplikasi ini mencakup:
 ## 📸 Tangkapan Layar (Screenshots)
 
 ### 1. Hasil Pencarian dan Pengurutan Data
-> *(Tampilan fitur pencarian Linear Search dan pengurutan data menggunakan Bubble Sort)*
+<img width="720" height="1600" alt="Pencarian_Martabak" src="https://github.com/user-attachments/assets/3146cdac-89ac-444c-9bee-61a557825179" />
+Pencarian dan Pengurutan Data di Screenshoot Martabak
 
-![Screenshot Pencarian dan Pengurutan](isi_dengan_link_gambar_pencarian_dan_pengurutan_di_sini)
+<img width="720" height="1600" alt="Pencarian_Terang_Bulan" src="https://github.com/user-attachments/assets/0cae05a3-4f0c-4617-9ef8-da555fee7da7" />
+Pencarian dan Pengurutan Data di Screenshoot Martabak
 
 ### 2. Logcat Android Studio (Menampilkan NIM)
 > *(Bukti implementasi Try-Catch dan Log.e yang mencetak Nama dan NIM di panel Logcat Android Studio)*
