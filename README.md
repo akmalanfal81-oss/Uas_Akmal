@@ -27,12 +27,15 @@ Isi dari aplikasi ini mencakup:
 
 ### 1. Hasil Pencarian dan Pengurutan Data
 
-
+## Hasil Pencarian
 <img width="720" height="1600" alt="Pencarian_Martabak" src="https://github.com/user-attachments/assets/3146cdac-89ac-444c-9bee-61a557825179" />
-* **Pencarian dan Pengurutan Data di Screenshoot Martabak
-
+# >Pencarian dan Pengurutan Data di Screenshoot Martabak
 <img width="720" height="1600" alt="Pencarian_Terang_Bulan" src="https://github.com/user-attachments/assets/0cae05a3-4f0c-4617-9ef8-da555fee7da7" />
-* **Pencarian dan Pengurutan Data di Screenshoot Martabak
+# >Pencarian dan Pengurutan Data di Screenshoot Martabak
+
+## Pengurutan Data
+<img width="1080" height="2400" alt="Data_Diagram_Martabak_Terang_Bulan_Terpopuler" src="https://github.com/user-attachments/assets/802ba127-055f-41de-b973-efb653af2e3c" />
+# Hasil Data Dummy
 
 ### 2. Logcat Android Studio (Menampilkan NIM)
 > *(Bukti implementasi Try-Catch dan Log.e yang mencetak Nama dan NIM di panel Logcat Android Studio)*
@@ -45,7 +48,8 @@ Isi dari aplikasi ini mencakup:
 * **Bahasa Pemrograman:** Kotlin
 * **Antarmuka Pengguna (UI):** XML Layout, Material Design Components
 * **Tools/IDE:** Android Studio
-* **Struktur Data:** ArrayList
+* **Struktur Data:** ArrayList![Uploading Data_Diagram_Martabak_Terang_Bulan_Terpopuler.jpeg…]()
+
 
 ---
 *Dibuat untuk memenuhi tugas Pemrograman Perangkat Bergerak.*
